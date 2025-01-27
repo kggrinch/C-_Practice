@@ -1,0 +1,6 @@
+Heap - 
+
+to heapify a non heapified array you must visit every node and compare. O(n)
+Except you can avoid the leafs
+
+
