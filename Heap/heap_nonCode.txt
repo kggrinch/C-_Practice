@@ -1,0 +1,6 @@
+
+Heaps - A complete binary tree that is empty or whose root contains a value >= each of its children and has heaps as its
+        subtrees. It is ordered in a weaker sense and it will always be a complete binary tree
+
+        Heapify() - to heapify a non heapify array you must visit every node and compare. O(n)
+        Except you can avoid the leafs
