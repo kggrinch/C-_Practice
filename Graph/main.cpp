@@ -14,6 +14,7 @@ void display(ItemType item)
 
 int main()
 {
+    // Add vertices first and then connect them with the edge
     Graph<std::string> graph;
 
     std::vector<std::string> vertices = {"A", "B", "C", "D"};
@@ -57,6 +58,20 @@ int main()
 
     std::cout << "\ngraph2.displayAdjacencyMatrix():\n ";
     graph2.displayAdjacencyMatrix();
+
+
+    // FGraph
+    Graph<std::string> g1;
+
+    std::vector<std::string> ver = {"A", "B", "C", "D"};
+
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        graph.add_vertex(vertices[i]);
+    }
+
+
+
 
 
 

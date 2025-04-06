@@ -10,7 +10,8 @@ class BinaryNode
 public:
   BinaryNode();
   BinaryNode(const T& anItem); BinaryNode(const T& anItem, BinaryNode<T>* leftPtr, BinaryNode<T>* rightPtr);
-  void setItem(const T& anItem); T getItem() const;
+  void setItem(const T& anItem);
+    T getItem() const;
   bool isLeaf() const;
   BinaryNode<T>* getLeftChildPtr() const;
   BinaryNode<T>* getRightChildPtr() const;
@@ -25,4 +26,4 @@ private:
 
 #include "binary_node.cpp"
 
- #endif
+#endif

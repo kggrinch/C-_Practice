@@ -57,7 +57,7 @@ int fib(int x)
 	{
 		return 1;
 	}
-	return fib(x -2) + fib(x - 1);
+	return fib(x - 2) + fib(x - 1);
 }
 
 

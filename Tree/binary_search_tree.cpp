@@ -20,7 +20,7 @@ BinarySearchTree<T>::BinarySearchTree(const T& rootItem) : rootPtr(nullptr)
 template<class T>
 BinarySearchTree<T>::BinarySearchTree(const BinarySearchTree<T>& tree) : rootPtr(nullptr)
 {
-    rootPtr = tree.rootPtr ? new BinaryNode<T>(*tree.rootPtr) : nullptr;
+    rootPtr = tree.rootPtr ? BinaryTree<T>::copyTree(tree.rootPtr) : nullptr;
 }
 
 template<class T>
@@ -44,7 +44,9 @@ int BinarySearchTree<T>::getHeight() const
 template<class T>
 int BinarySearchTree<T>::getNumberOfNodes() const
 {
-    return BinaryTree<T>::getNumberOfNodesHelper(rootPtr);
+    int total = 0;
+    BinaryTree<T>::getNumberOfNodesHelper(rootPtr);
+    return total;
 }
 
 template<class T>
@@ -57,7 +59,7 @@ T BinarySearchTree<T>::getRootData() const
 template<class T>
 void BinarySearchTree<T>::setRootData(const T& newData) const
 {
-    if (rootPtr) rootPtr->setItem(newData);
+    // Needs implementation
 }
 
 template<class T>
@@ -152,6 +154,9 @@ BinaryNode<T>* BinarySearchTree<T>::removeValue(BinaryNode<T>* subTreePtr, const
     } else if (target > subTreePtr->getItem()) {
         subTreePtr->setRightChildPtr(removeValue(subTreePtr->getRightChildPtr(), target, success));
     } else {
+        // Case 1. subTreePtr will become a nullptr if the remove node was a leaf node
+        // Case 2. subTreePtr will become the left child of the remove node or the right child of the remove node
+        // Case 3. subTreePtr will become the successor and the node where the successor was taken will be deleted
         subTreePtr = removeNode(subTreePtr);
         success = true;
     }
@@ -163,18 +168,33 @@ BinaryNode<T>* BinarySearchTree<T>::removeValue(BinaryNode<T>* subTreePtr, const
 template<class T>
 BinaryNode<T>* BinarySearchTree<T>::removeNode(BinaryNode<T>* nodePtr)
 {
-    if (!nodePtr->getLeftChildPtr()) {
+    // Case 1: if remove node does not have a left child
+    if (!nodePtr->getLeftChildPtr()) // read this like if the nodePtr does not have a left child | If the nodePtr left child is not a real node (nullptr) | If nodePtr left child is a nullptr
+    {
+        // If no right child either, a nullptr is set to temp.
         BinaryNode<T>* temp = nodePtr->getRightChildPtr();
         delete nodePtr;
+        nodePtr = nullptr;
         return temp;
-    } else if (!nodePtr->getRightChildPtr()) {
+    }
+    // Case 2: If remove node does not have a right child
+    // Case 1 & 2 both work in the case if remove node does not have children. In that case either case 1 will return a nullptr.
+    else if (!nodePtr->getRightChildPtr())
+    {
         BinaryNode<T>* temp = nodePtr->getLeftChildPtr();
         delete nodePtr;
+        nodePtr = nullptr;
         return temp;
-    } else {
+    }
+    // Case 3: If remove node has two children.
+    // Replace the remove node with the successor (smallest value from the remove node's right subtree) - default most common approach
+    // or the processor (greatest value from the remove node's left subtree)
+    else
+    {
+        // Save the Successor item
         T inorderSuccessor;
-        nodePtr->setRightChildPtr(removeLeftmostNode(nodePtr->getRightChildPtr(), inorderSuccessor));
-        nodePtr->setItem(inorderSuccessor);
+        nodePtr->setRightChildPtr(removeInorderSuccessor(nodePtr->getRightChildPtr(), inorderSuccessor)); // remove the successor node
+        nodePtr->setItem(inorderSuccessor); // Set the remove_node with the successor item
         return nodePtr;
     }
 }
@@ -183,15 +203,21 @@ BinaryNode<T>* BinarySearchTree<T>::removeNode(BinaryNode<T>* nodePtr)
 // Sets inorderSuccessor to the value in this node.
 // Returns a pointer to the revised subtree. BinaryNode<ItemType>* removeLeftmostNode(
 template<class T>
-BinaryNode<T>* BinarySearchTree<T>::removeLeftmostNode(BinaryNode<T>* subTreePtr, T& inorderSuccessor)
+BinaryNode<T>* BinarySearchTree<T>::removeInorderSuccessor(BinaryNode<T>* subTreePtr, T& inorderSuccessor)
 {
-    if (!subTreePtr->getLeftChildPtr()) {
-        inorderSuccessor = subTreePtr->getItem();
-        BinaryNode<T>* temp = subTreePtr->getRightChildPtr();
+    // If the left child is a nullptr it is the successor node
+    if (!subTreePtr->getLeftChildPtr())
+    {
+        inorderSuccessor = subTreePtr->getItem(); // save successor item
+        BinaryNode<T>* temp = subTreePtr->getRightChildPtr(); // replace the successor node with the right child. If no right child it will be set to nullptr
         delete subTreePtr;
-        return temp;
-    } else {
-        subTreePtr->setLeftChildPtr(removeLeftmostNode(subTreePtr->getLeftChildPtr(), inorderSuccessor));
+        subTreePtr= nullptr;
+        return temp; // return nullptr or the right child of the successor
+    }
+    else
+    {
+        // If not successor keep traversing left
+        subTreePtr->setLeftChildPtr(removeInorderSuccessor(subTreePtr->getLeftChildPtr(), inorderSuccessor));
         return subTreePtr;
     }
 }

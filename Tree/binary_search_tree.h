@@ -55,7 +55,7 @@ protected:
   // Removes the leftmost node in the left subtree of the node // pointed to by nodePtr.
   // Sets inorderSuccessor to the value in this node.
   // Returns a pointer to the revised subtree. BinaryNode<ItemType>* removeLeftmostNode(
-  BinaryNode<T>* removeLeftmostNode(BinaryNode<T>* subTreePtr, T& inorderSuccessor);
+  BinaryNode<T>* removeInorderSuccessor(BinaryNode<T>* subTreePtr, T& inorderSuccessor);
 
   BinaryNode<T>* findNode(BinaryNode<T>* treePtr, const T& target) const;
 

@@ -39,7 +39,7 @@ class BinaryTree // : public Tree<T>
 
   protected:
     int getHeightHelper(BinaryNode<T>* subTreePtr) const;
-    int getNumberOfNodesHelper(BinaryNode<T>* subTreePtr) const;
+    void getNumberOfNodesHelper(BinaryNode<T>* subTreePtr, int& total) const;
 
     // Recursively deletes all nodes from the tree.
     void destroyTree(BinaryNode<T>* subTreePtr);

@@ -58,7 +58,7 @@
         //                                           / \   \
         //                                          D   E   F Level 3
 
-        //               11. Ancestor = A node is an ancestor of another if there is a direct pat from the ancestor to
+        //               11. Ancestor = A node is an ancestor of another if there is a direct path from the ancestor to
         //                              the other node (moving only upward in the tree). Ex: a->b->c, a is an ancestor of c.
 
         //               12. Descendant = A node is a descendant of another if there is a direct path from the other node to it

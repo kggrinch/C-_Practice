@@ -4,7 +4,7 @@
 #include "binary_tree.h"
 #include "stack"
 
-// This is a binary tree. nont a binary search tree.
+// This is a binary tree. not a binary search tree.
 
 
 
@@ -71,24 +71,33 @@ void BinaryTree<T>::destroyTree(BinaryNode<T>* subTreePtr)
 {
   if (subTreePtr != nullptr)
   {
-    destroyTree(subTreePtr->getLeftChildPtr()); destroyTree(subTreePtr->getRightChildPtr()); delete subTreePtr;
+    destroyTree(subTreePtr->getLeftChildPtr());
+    destroyTree(subTreePtr->getRightChildPtr());
+    delete subTreePtr;
   }
 } 
 
 // Get height helper method
+
+// Time Complexity: O(n)
 template<class T>
 int BinaryTree<T>::getHeightHelper(BinaryNode<T>* subTreePtr) const 
 {
-  if (subTreePtr == nullptr) 
-  {
-    return 0;
-  }
-  else
-  {
-    return 1 + std::max(getHeightHelper(subTreePtr->getLeftChildPtr()), getHeightHelper(subTreePtr->getRightChildPtr()));
+  if (subTreePtr == nullptr) return 0;
 
+  return 1 + std::max(getHeightHelper(subTreePtr->getLeftChildPtr()), getHeightHelper(subTreePtr->getRightChildPtr()));
+}
+
+template<class T>
+void BinaryTree<T>::getNumberOfNodesHelper(BinaryNode<T>* subTreePtr, int& total) const
+{
+  if(!subTreePtr)
+  {
+    getNumberOfNodesHelper(subTreePtr->getLeftChildPtr(), total);
+    total++;
+    getNumberOfNodesHelper(subTreePtr->getRightChildPtr(), total);
   }
-} 
+}
 
 
 // Add method

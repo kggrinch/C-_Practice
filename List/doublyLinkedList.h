@@ -78,71 +78,23 @@ template<class T>
 bool DoublyLinkedList<T>::insert(T* obj)
 {
   // Check if valid obj
-  // if(obj == nullptr)
-  // {
-  //   return false;
-  // }
+  if(obj == nullptr)
+  {
+    return false;
+  }
 
-  // // Check if dup. Changed to check final quiz doubly linkedlist implementation
-  // Node* current = head_;
-  // while(current != nullptr)
-  // {
-  //   if(*(current->data) == *(obj))
-  //   {
-  //     return false;
-  //   }
-  //   current = current->next;
-  // }
+  // Check if dup. Changed to check final quiz doubly linkedlist implementation
+  Node* current = head_;
+  while(current != nullptr)
+  {
+    if(*(current->data) == *(obj))
+    {
+      return false;
+    }
+    current = current->next;
+  }
 
-  // // Allocate new memory
-  // T* new_obj = new T;
-  // *(new_obj) = *(obj);
-  // Node* new_node = new Node;
-  // new_node->data = new_obj;
-  // new_node->next = nullptr;
-  // new_node->prev = nullptr;
-
-  // // Check if list is empty
-  // if(head_ == nullptr)
-  // {
-  //   head_ = new_node;
-  //   tail_ = new_node;
-  //   return true;
-  // }
-  
-  // // Check if head
-  // if(*(new_node->data) < *(head_->data))
-  // {
-  //   new_node->next = head_;
-  //   head_->prev = new_node;
-  //   head_ = new_node;
-  //   return true;
-  // }
-
-  // // Check if tail
-  // if(*(new_node->data) >= *(tail_->data))
-  // {
-  //   tail_->next = new_node;
-  //   new_node->prev = tail_;
-  //   tail_ = new_node;
-  //   return true;
-  // }
-
-  // Node* current = head_; 
-  // while(current != nullptr && *(current->data) <= *(new_node->data))
-  // {
-  //   current = current->next;
-  // }
-
-  // new_node->next = current;
-  // new_node->prev = current->prev;
-
-  // current->prev->next = new_node;
-  // current->prev = new_node;
-  // return true;
-
-
-
+  // Allocate new memory
   T* new_obj = new T;
   *(new_obj) = *(obj);
   Node* new_node = new Node;
@@ -150,13 +102,63 @@ bool DoublyLinkedList<T>::insert(T* obj)
   new_node->next = nullptr;
   new_node->prev = nullptr;
 
-  if (head_ == nullptr) { // List is empty
-  head_ = tail_ = new_node;
-  } else {
-  tail_->next = new_node;
-  new_node->prev = tail_;
-  tail_ = new_node;
+  // Check if list is empty
+  if(head_ == nullptr)
+  {
+    head_ = new_node;
+    tail_ = new_node;
+    return true;
   }
+
+  // Check if head
+  if(*(new_node->data) < *(head_->data))
+  {
+    new_node->next = head_;
+    head_->prev = new_node;
+    head_ = new_node;
+    return true;
+  }
+
+  // Check if tail
+  if(*(new_node->data) >= *(tail_->data))
+  {
+    tail_->next = new_node;
+    new_node->prev = tail_;
+    tail_ = new_node;
+    return true;
+  }
+
+  current = head_;
+  while(current != nullptr && *(current->data) <= *(new_node->data))
+  {
+    current = current->next;
+  }
+
+  new_node->next = current;
+  new_node->prev = current->prev;
+
+  current->prev->next = new_node;
+  current->prev = new_node;
+  return true;
+
+
+
+  // T* new_obj = new T;
+  // *(new_obj) = *(obj);
+  // Node* new_node = new Node;
+  // new_node->data = new_obj;
+  // new_node->next = nullptr;
+  // new_node->prev = nullptr;
+  //
+  // if (head_ == nullptr)
+  //   { // List is empty
+  //   head_ = tail_ = new_node;
+  // }
+  // else {
+  //   tail_->next = new_node;
+  //   new_node->prev = tail_;
+  //   tail_ = new_node;
+  // }
 
 
 }

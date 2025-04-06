@@ -5,7 +5,7 @@
 
 // default constructor
 template<class T>
-BinaryNode<T>::BinaryNode() : item {item}, rightChild(nullptr), leftChild(nullptr)
+BinaryNode<T>::BinaryNode() : item {T()}, rightChild(nullptr), leftChild(nullptr)
 {
 
 }

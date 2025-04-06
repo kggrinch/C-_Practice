@@ -82,6 +82,24 @@ int main()
     a3.display();
     std::cout << "\n";
 
+    std::cout << "heap4\n";
+    int array2[] = {5, 10, 7, 25, 24, 23, 70, 26};
+    ArrayMaxHeap<int> array_max_heap4(array2, 8);
+    array_max_heap4.display();
+
+
+    // Finals heaps
+    int f_array1[] = {13, 17, 35, 11, 7, 3, 29, 15, 16};
+
+    ArrayMaxHeap<int> f_max_heap(f_array1, 9);
+
+    std::cout << "mdowawd\n";
+    f_max_heap.display();
+
+
+
+    ArrayMinHeap<int> f_min_heap;
+
 
 
     return 0;

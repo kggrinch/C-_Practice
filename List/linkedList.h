@@ -42,6 +42,8 @@ class LinkedList
     // Assignment
     LinkedList& operator=(const LinkedList& other);
 
+    int nth_to_last(int n);
+
     // Output Operator
     template<typename U>
     friend std::ostream& operator<<(std::ostream& stream, const LinkedList<U>& other);
@@ -101,6 +103,7 @@ if(obj == nullptr)
   // Allocate new memory for node. Insert copied object into new allocated node
   Node* new_node = new Node;
   new_node->data = new_obj;
+  new_node->next = nullptr;
 
   // Check if list is empty. Assign head to insert_node
   if(head_ == nullptr)
@@ -251,7 +254,7 @@ bool LinkedList<T>::Merge(LinkedList& list1)
 
   // Create iterators for this and passed in lists
   Node* ptr1 = head_; // this list iterator
-  Node* ptr2 = list1.head_; // passed in list iterator
+  Node* ptr2 = list1.head_;// passed in list iterator
   
   // Traverse iterators of this and passed in lists checking order
   while(ptr1 != nullptr && ptr2 != nullptr)
@@ -426,6 +429,32 @@ std::ostream& operator<<(std::ostream& stream, const LinkedList<T>& other)
   }
   return stream;
 }
+
+template<class T>
+int LinkedList<T>::nth_to_last(int n) {
+  if (head_ == nullptr || n < 0) {
+    return -1;
+  }
+
+  Node* p1 = head_;
+  Node* p2 = head_;
+
+  for (int i = 0; i < n; i++) {
+    if (p1 == nullptr) {
+      return -1;
+    }
+    p1 = p1->next;
+  }
+
+  while (p1 != nullptr && p1->next != nullptr) {
+    p2 = p2->next;
+    p1 = p1->next;
+  }
+
+  return p2 != nullptr ? p2->data : -1;
+}
+
+
 
 
 #endif

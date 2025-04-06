@@ -89,7 +89,7 @@ bool ArrayMaxHeap<ItemType>::add(const ItemType& newData)
   itemCount++;
 
   while (newDataIndex > 0)
-    {
+  {
     int parentIndex = getParentIndex(newDataIndex);
     if (items[newDataIndex] > items[parentIndex])
     {
@@ -169,13 +169,16 @@ void ArrayMaxHeap<ItemType>::heapRebuild(int subTreeRootIndex)
   {
     int leftChildIndex = getLeftChildIndex(subTreeRootIndex);
     int rightChildIndex = getRightChildIndex(subTreeRootIndex);
-    int largerChildIndex = leftChildIndex;
+    int largerChildIndex = leftChildIndex; // save leftchild as default greater
 
+    // Check which child is greater
+    // If right child is greater then left label it as theg reater child
     if (rightChildIndex < itemCount && items[rightChildIndex] > items[leftChildIndex])
     {
       largerChildIndex = rightChildIndex;
     }
 
+    // Check if the larger child is greater than the parent
     if (largerChildIndex < itemCount && items[subTreeRootIndex] < items[largerChildIndex])
     {
       std::swap(items[subTreeRootIndex], items[largerChildIndex]);
