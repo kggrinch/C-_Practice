@@ -1,0 +1,212 @@
+Time and Space Complexity Data Structures and Algorithms
+
+[Array]
+
+    Access:
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Search:
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+    Insertion (at end):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Insertion (at arbitrary position):
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+    Deletion (at end):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Deletion (at arbitrary position):
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+[Linked List (Singly and Doubly)]
+
+    Access:
+        Best: O(1) (if accessing head or tail)
+        Average: O(n)
+        Worst: O(n)
+
+    Search:
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+    Insertion (at head/tail):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Insertion (at arbitrary position):
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+    Deletion (at head/tail):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Deletion (at arbitrary position):
+        Best: O(1)
+        Average: O(n)
+        Worst: O(n)
+
+[Stacks (Array/Linked List)]
+
+    Push (insert):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Pop (remove):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Peek (access top):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+[Queues (Array/Linked List)]
+
+    Enqueue (insert):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Dequeue (remove):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+    Peek (access front):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+[Hash Tables (Hash Maps)]
+
+    Search:
+        Best: O(1)
+        Average: O(1)
+        Worst: O(n) (in case of collisions)
+
+    Insert:
+        Best: O(1)
+        Average: O(1)
+        Worst: O(n) (in case of collisions)
+
+    Delete:
+        Best: O(1)
+        Average: O(1)
+        Worst: O(n) (in case of collisions)
+
+[Heap (Min/Max Heap)]
+
+    Insert:
+        Best: O(log n)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Delete (remove root):
+        Best: O(log n)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Access root (peek):
+        Best: O(1)
+        Average: O(1)
+        Worst: O(1)
+
+[Binary Search Tree:]
+
+    Search:
+        Best: O(1) (if the tree is balanced)
+        Average: O(log n)
+        Worst: O(n) (if the tree is unbalanced)
+
+    Insert:
+        Best: O(1) (if the tree is balanced)
+        Average: O(log n)
+        Worst: O(n) (if the tree is unbalanced)
+
+    Delete:
+        Best: O(1) (if the tree is balanced)
+        Average: O(log n)
+        Worst: O(n) (if the tree is unbalanced)
+
+AVL Tree (Self-Balancing BST)
+
+    Search:
+        Best: O(log n)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Insert:
+        Best: O(log n)
+        Average: O(log n)
+        Worst: O(log n)
+
+    Delete:
+        Best: O(log n)
+        Average: O(log n)
+        Worst: O(log n)
+
+[Graph]
+    Adjacency Matrix:
+        Search for an edge between two vertices:
+            Best: O(1)
+            Average: O(1)
+            Worst: O(1)
+            Space Complexity: O(V^2)
+
+    Adjacency List:
+        Search for an edge between two vertices:
+            Best: O(1)
+            Average: O(V)
+            Worst: O(V)
+            Space Complexity: O(V + E)
+
+    Breadth-First Search (BFS):
+        Best: O(V + E)
+        Average: O(V + E)
+        Worst: O(V + E)
+
+    Depth-First Search (DFS):
+        Best: O(V + E)
+        Average: O(V + E)
+        Worst: O(V + E)
+
+    Primes MST Algorithm
+        Best: O(E + V log V)
+        Average: O(E + V log V)
+        Worst: O(E log V)
+
+        Space Complexity:
+        Best, Average, and Worst: O(V + E)
+
+    Dijkstra's Algorithm:
+        Best: O(V^2) (using an array)
+        Average: O((V + E) log V) (using a priority queue)
+        Worst: O(V^2) (using an array)
+
+    Floyd-Warshall Algorithm:
+        Best: O(V^3)
+        Average: O(V^3)
+        Worst: O(V^3)
+
+

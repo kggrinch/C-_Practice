@@ -1,4 +1,6 @@
 #include <iostream>      // I/O streams (used for printing and reading to console)
+#include <algorithm>     // algorithms library that can be used on the ADTs
+
 #include <string>        // String
 #include <vector>        // vector
 #include <list>          // LinkedList - doubly
@@ -10,6 +12,25 @@
 #include <unordered_set> // Set dictionary implemented using hashing (has order to elements)
 #include <set>           // Set dictionary implemented using balance tree (red and black tree)
 #include <utility>       // Pair
+
+/*
+ * Data Structure
+ ? Sub_Data Structure or functionality/use-cases
+ ! sub_functionality/use-cases
+ */
+
+
+template<class ItemType>
+void print(ItemType list)
+{
+  for(auto& v : list)
+  {
+    std::cout << v << " ";
+  }
+  std::cout << "\n";
+}
+
+
 
 int main()
 {
@@ -32,7 +53,10 @@ int main()
   std::cout << "s.at(0): " << c << "\n";
 
   // Retrieves the substring of the string
-  std::string sub_string_s = s.substr(0, 5);
+  // This works like this:
+  // String: Hello World! - it has 11 character including the blank space in the middle
+  // s.substr(6, 5) - says get the first character at position 6 and build the rest of the string until we reach a string of 5 characters
+  std::string sub_string_s = s.substr(6, 5);
   std::cout << "s.substr(0, 5): " << sub_string_s << "\n";
 
   // Retrieves the first index occurrence of the given string
@@ -138,9 +162,9 @@ int main()
   dynamic_s_a = nullptr;
   dynamic_c_a = nullptr;
 
-  /*?
-  ? 2D Array
-  ?*/
+
+  //? 2D Array
+
   int row_size = 3;
   int column_size = 3;
 
@@ -216,20 +240,127 @@ int main()
   std::cout << "\n";
 
 
-
-
-
-
   /**
-  * Lists (doubly linkedList)
-  *
+  * Lists (doubly linkedList) (works similar to a vector but with better insertions and deletions)
+  * Explanation: A doubly linkedlist container that supports constant time insertions and removal of elements from anywhere in the container.
+  *              Each element is linked to the next and previous elements, this means we can traverse the list in order and reverse order.
   */
+  std::cout << "\nList\n";
+
+  std::list<int> l1;
+  std::list<int> l2 = {1, 2, 3, 4, 5}; // list can use an initializer list
+
+  //? Inserting elements
+  l1.push_back(3);
+  l1.push_back(3);
+  l1.push_back(4);
+  l1.push_back(4);
+  l1.push_front(1);
+  auto list_it = l1.begin();
+  while(list_it != l1.end() && *list_it != 3) // traverse linked list until we find 3
+  {
+    list_it++; // increment iterator to go to next position
+  }
+  l1.insert(list_it, 2); // insert 2 before 3
+  l1.insert(list_it, 2);
+
+  // .begin() - returns an iterator pointing to the first position in the list
+  // .end() - returns an iterator pointing to the last position in the list
+  // .front() - returns a reference pointing to the value in the front of the list
+  // .back() - returns a reference pointing to the value in the back of the list
+
+  //? Accessing elements. (can only access the front and back at const time)
+  int front_value = l1.front();
+  int back_value = l1.back();
+  std::cout << "front value: " << front_value << "\nback value: " << back_value << "\n";
+
+  //? Accessing elements through traversal. (can access a specific element by traversing the list "linear time")
+  int find_two{}; // {} sets a default value for find_two
+  for(auto v : l1)
+  {
+    if(v == 2) find_two = v;
+  }
+  std::cout << "accessing value through traversal: " << find_two << "\n";
+
+  //? Removing elements all instances of the item from the list
+  l1.remove(2); // removes all instances of the item in the list
+  std::cout << "l1 after l1.remove(2):\n";
+  for(const auto& v : l1)
+  {
+    std::cout << v << " ";
+  }
+  std::cout << "\n";
+
+  //? Removing a specific element from the list
+  auto three_it = l1.begin();
+  while(three_it != l1.end() && *three_it != 3) // traverse list until we reach an iterator point to the first 3
+  {
+    three_it++; // increment the iterator to go to next position
+  }
+  l1.erase(three_it); // removes only the item the iterator is associated to.
+
+  // Could use a std::find() algorithm to retrieve an iterator pointing to the desired value
+  // auto l1_it2 = std::find(l1.begin(), l1.end(), 3);
+
+  std::cout << "list after l1.erase(three_it):\n";
+  for(const auto& v : l1)
+  {
+    std::cout << v << " ";
+  }
+  std::cout << "\n";
+
+  // removes all consecutive elements, meaning one unique element will be left while any duplicates of the elements are removed
+  l1.unique();
+  std::cout << "l1 after l1.unique(4):\n";
+  print(l1);
+
+  // Check if empty
+  std::cout << "l1.empty(): " << l1.empty() << "\n";
+
+  // Clear list
+  l1.clear();
+  std::cout << "l1.empty() after l1.clear(): " << l1.empty() << "\n";
+
 
 
   /**
   * Stacks
-  *
+  * Explanation:  A stack Last In First Out (LIFO) ADT where each value is stacked on top of each other and the value
+  *               at the top of the stack if first to get popped. The stack in the STL is implemented using a deque ADT (dequeue is implemented using an array)
   */
+  std::cout << "\nStack\n";
+
+  std::stack<int> stack;
+
+  //? Inserting
+  stack.push(1);
+  stack.push(2);
+  stack.push(3);
+  stack.push(4);
+  stack.push(5);
+
+  //? Accessing elements
+  // In a stack you can only access the top element
+  // Will cause stegmation fault if stack is empty
+  std::cout << "stack.top(): " << stack.top() << "\n"; // Access element at the top
+
+  //? Removing elements
+  stack.pop(); // removes top element. Does not return anything
+  std::cout << "stack.top() after stack.pop(): " << stack.top() << "\n";
+
+  //? Check size
+  std::cout << "stack.size(): " << stack.size() << "\n";
+
+  //? Check if empty
+  std::cout << "stack.empty(): " << stack.empty() << "\n";
+
+  //? Clear
+  // Stack does not have a clear function so use this algorithm
+  while(!stack.empty())
+  {
+    stack.pop();
+  }
+  std::cout << "stack.empty after clear operation: " << stack.empty() << "\n";
 
 
   /**
@@ -237,9 +368,11 @@ int main()
   *
   */
 
-  /*?
-  ? Double Ended Queue
-  ?*/
+
+  /*
+  ?  Double Ended Queue
+  ?  Explanation:
+  */
 
   std::deque<int> q;
 
@@ -254,9 +387,12 @@ int main()
 
   q.push_back(6);
 
+
   /*
   ?  Normal Queue
+  ?  Explanation:
   */
+
 
 
   /*
@@ -269,13 +405,176 @@ int main()
 
   /**
   * Unordered Maps
-  *
+  * Exmplanation: A map is a dictionary ADT that holds key value pairs where each vlaue is assigned to a distaict unique key.
+  *               In the case of a unordered_map, it has no order to its keys or values and uses hashing specifically the seperate chaining collion technique.
   */
+  std::cout << "\nUnordered_Map\n";
+
+  std::unordered_map<int, std::string> unordered_names;
+
+  //?  Inserting elements into unordered_map
+  //! Traditional insert function.
+  // Will insert the key-value pair in the map if key does not already exist. Uses pair initializer list
+  // If key already exists it will return an iterator to the key and false indicating that the insertion did not work.
+  unordered_names.insert({1, "Bob"});
+
+  //! Inserting use brackets (useful for when you want to either insert and element or update the element at the key)
+  // Technically a find or add operation.
+  // This will try to locate the key and update the element at the key.
+  // If the key does not exist it will create a key value pair
+  // This requires the key to have a default initializer type
+  unordered_names[2] = "Jane";
+
+  //! Insertion where object is created in place.
+  // Normal insertion utilizes a copy constructor where the key value pair is copied from the parameters.
+  // An emplace function carries the passed in key value pair in the parameter to a constructor which creates the objects.
+  // Same case as insert it will not override a key value pair if it already exists in the map
+  unordered_names.emplace(3, "Larry"); // E
+
+  //! Insertion by passing a pair
+  std::pair<int, std::string> unordered_name4 = {2, "Jane"};
+  unordered_names.insert(unordered_name4);
+
+  //? Accessing elements
+  std::cout << "Accessing first element: ";
+  const auto& un_map_it = unordered_names.find(1); // returns iterator
+  const std::string un_map_name = un_map_it->second;
+  std::cout << un_map_name << "\n";
+
+  //? Accessing elements through loop
+  // Notice how accessing the elements has no order
+  std::cout << "Accessing elements through loop:\n";
+  for(const auto& elements : unordered_names)
+  {
+    std::cout << "Key: " << elements.first << " Value: " << elements.second << "\n";
+  }
+  std::cout << "\n";
+
+  //? C++ pro trick
+  // For more organization use a pair initializer list to hold elements separately this avoid using .first and .second
+  // for(const auto& [key, value] : unordered_names)
+  // {
+  //   std::cout << "Key: " << key << " Value: " << value << "\n";
+  // }
+  // std::cout << "\n";
+
+  //? Checking if an element exists */
+  // Two ways
+
+  /*! Using count() */
+  // count returns the number of occurrences the element has in the set. However, since it's a set and an element exists in the set it will only
+  // have one occurrence, and if it does not exist then there will be no occurrence and count will return a 0.
+  std::cout << "Using count():\n";
+  std::cout << "Element exist with count | unordered_names.count(1) | 1=true 0=false: " << unordered_names.count(1) << "\n";
+  std::cout << "Element does not exist with count | unordered_names.count(1) | 1=true 0=false: " << unordered_names.count(5) << "\n";
+
+  /*! Using find() */
+  // find returns an iterator at the place where the element is at, but if the element does not exist then the iterator will point to .end()
+  // If the iterator points to .end we can assume the element does not exist in the set
+  std::cout << "Using find():\n";
+  const auto& un_map_foundIt = unordered_names.find(1);
+  const auto& un_map_notFoundIt = unordered_names.find(5);
+  bool un_map_found = un_map_foundIt != unordered_names.end() ? true : false;
+  bool un_map_notFound = un_map_notFoundIt != unordered_names.end() ? true : false;
+  std::cout << "Element exist with find | unordered_names.find(1) | 1=true 0=false: " << un_map_found << "\n";
+  std::cout << "Element does not exist with find | unordered_names.find(1) | 1=true 0=false: " << un_map_notFound << "\n";
+
+  //? Check if empty
+  bool isUnmapEmpty = unordered_names.empty();
+  std::cout << "unordered_names.empty(): " << isUnmapEmpty << "\n";
+
+  //?  Clear unordered map
+  unordered_names.clear();
+  std::cout << "empty() after unordered_names.empty(): " << unordered_names.empty() << "\n";
+
+
 
   /**
   * Maps
-  *
+  * Explanation: A map is a dictionary ADT that holds with key value pairs where each value is assinged to a distict unique key.
+  *              In the case of a Normal Map, it has an order to its keys only and uses a balance search tree (red and black tree)
   */
+  std::cout << "\nMap\n";
+
+  std::map<int, std::string> names;
+
+  //?  Inserting elements into map
+
+  //! Traditional insert function.
+  // Will insert the key-value pair in the map if key does not already exist. Uses pair initializer list
+  // If key already exists it will return an iterator to the key and false indicating that the insertion did not work.
+  names.insert({1, "Bob"});
+
+  //! Inserting use brackets (useful for when you want to either insert and element or update the element at the key)
+  // Technically a find or add operation.
+  // This will try to locate the key and update the element at the key.
+  // If the key does not exist it will create a key value pair
+  // This requires the key to have a default initializer type
+  names[2] = "Jane";
+
+  //! Insertion where object is created in place.
+  // Normal insertion utilizes a copy constructor where the key value pair is copied from the parameters.
+  // An emplace function carries the passed in key value pair in the parameter to a constructor which creates the objects.
+  // Same case as insert it will not override a key value pair if it already exists in the map
+  names.emplace(3, "Larry"); // E
+
+  //! Insertion by passing a pair
+  std::pair<int, std::string> name4 = {2, "Jane"};
+  names.insert(name4);
+
+  //? Accessing elements
+  std::cout << "Accessing first element: ";
+  const auto& map_it = names.find(1); // returns iterator
+  const std::string map_name = map_it->second;
+  std::cout << map_name << "\n";
+
+  //? Accessing elements through loop
+  // Notice how accessing the elements has an order in the keys
+  std::cout << "Accessing elements through loop:\n";
+  for(const auto& elements : names)
+  {
+    std::cout << "Key: " << elements.first << " Value: " << elements.second << "\n";
+  }
+  std::cout << "\n";
+
+  //? C++ pro trick
+  // For more organization use a pair initializer list to hold elements separately this avoid using .first and .second
+  // for(const auto& [key, value] : names)
+  // {
+  //   std::cout << "Key: " << key << " Value: " << value << "\n";
+  // }
+  // std::cout << "\n";
+
+
+  //? Checking if an element exists */
+  // Two ways
+
+  /*! Using count() */
+  // count returns the number of occurrences the element has in the set. However, since it's a set and an element exists in the set it will only
+  // have one occurrence, and if it does not exist then there will be no occurrence and count will return a 0.
+  std::cout << "Using count():\n";
+  std::cout << "Element exist with count | names.count(1) | 1=true 0=false: " << names.count(1) << "\n";
+  std::cout << "Element does not exist with count | names.count(5) | 1=true 0=false: " << names.count(5) << "\n";
+
+  /*! Using find() */
+  // find returns an iterator at the place where the element is at, but if the element does not exist then the iterator will point to .end()
+  // If the iterator points to .end we can assume the element does not exist in the set
+  std::cout << "Using find():\n";
+  const auto& map_foundIt = names.find(1);
+  const auto& map_notFoundIt = names.find(5);
+  bool map_found = map_foundIt != names.end() ? true : false;
+  bool map_notFound = map_notFoundIt != names.end() ? true : false;
+  std::cout << "Element exist with find | names.find(1) | 1=true 0=false: " << map_found << "\n";
+  std::cout << "Element does not exist with find | names.find(5) | 1=true 0=false: " << map_notFound << "\n";
+
+  //? Check if empty
+  bool isMapEmpty = names.empty();
+  std::cout << "names.empty(): " << isMapEmpty << "\n";
+
+  //?  Clear map
+  names.clear();
+  std::cout << "empty() after names.clear(): " << names.empty() << "\n";
+
 
   /**
   * Unordered Sets

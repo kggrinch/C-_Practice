@@ -22,7 +22,7 @@
 //   virtual T getRootData() const = 0;
 //
 //   /** Replaces the data item in the root of this binary tree with the given data, if the tree is not empty. However, if
-//    * he tree is empty, inserts a new root node containing the
+//   the tree is empty, inserts a new root node containing the
 //   given data into the tree. @pre None.
 //   @post The data in the root of the binary tree is as given.
 //   @param newData The data for the root. */
