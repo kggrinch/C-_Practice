@@ -1,0 +1,29 @@
+# IntelliJ IDEA files
+.idea/
+*.iml
+
+# CMake build folders
+**/cmake-build-debug/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/Makefile
+*.cmake
+*CMakeLists.txt
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Compiled / binary files
+*.exe
+*.out
+*.o
+*.obj
+*.so
+*.dll
+*.class
+*.jar
+
+# Logs
+*.log
