@@ -4,6 +4,17 @@
 
 int main()
 {
+    // An array of 5 pointers
+    int a = 5;
+    int* int_pointer[5];
+    int_pointer[0] = &a;
+
+    std::cout << "int_pointer: " << int_pointer << "\n"; // Prints the address of the array
+    std::cout << "*int_pointer: " << *int_pointer << "\n"; // Prints the address of pointer in the [0] since the array decays to the first element
+    std::cout << "int_pointer[0]: " << int_pointer[0] << "\n"; // Same as the top returns address of the pointer in [0]
+    std::cout << "*int_pointer[0]: " << *int_pointer[0] << "\n"; // Returns the garbage int in the first element after dereferencing the first pointer
+
+
     // Create am example Trie
     Trie trie1;
     std::vector<std::string> arr = {"and", "ant", "do", "dad"};

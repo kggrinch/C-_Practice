@@ -3,7 +3,18 @@
 
 Trie::Trie()
 {
+    // This creates a dynamic trienode which will live beyond the scope of the Trie object. Therefore, it need a deconstruct
     root = new TrieNode();
+
+    // If you used a static Trie node then it will live only within the scope of the Trie object. No need for a deconstruct
+    // For a static implementation leave the constructor empty.
+}
+
+// Deallocate dynamic memory if chosen to use dynamic trienode
+Trie::~Trie()
+{
+    delete root;
+    root = nullptr;
 }
 
 // Method to insert a key into the Trie

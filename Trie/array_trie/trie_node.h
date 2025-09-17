@@ -1,6 +1,9 @@
 #ifndef TRI_NODE_H
 #define TRI_NODE_H
 
+
+// Still needs a deconstructor
+
 class TrieNode
 {
 public:

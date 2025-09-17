@@ -3,11 +3,14 @@
 #include "trie_node.h"
 #include <string>
 
+// Still needs a deconstructor
 
 class Trie
 {
 public:
     Trie();
+
+    ~Trie();
 
     // Method to insert a key into the Trie
     // Time: O(n)
@@ -22,7 +25,7 @@ public:
     // Method to Search Prefix key in Trie
     // Time: O(n)
     // Space: O(1)
-    bool isPrefix(std::string &key);
+    bool isPrefix(std::string& key);
 
 
 private:
