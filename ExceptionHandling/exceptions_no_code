@@ -1,0 +1,48 @@
+// Exceptions: Throwing an exception is used to signal errors from functions, where "errors" are typically limited to only the following
+//                  * Failures to meet the preconditions, such as failing to produce a valid return value object
+//                  * Failures to meet the preconditions of another function that must be called.
+//                  * (for non-private member functions) Failure to (re)establish a class invariant.
+//             Instead of crashing, the program can:
+//             1. Throw an exception when something goes wrong.
+//             2. Catch it in a handler
+//             3. and then recover gracefully.
+
+// Why use Exceptions Handling: In any program errors happen - invalid input, missing files, failed memory allocation, ect
+//                              Without exception handling, you have to check error manually after every operation. However,
+//                              with exception handling the errors are checked automatically after each operation and can be
+//                              handled appropriately and cleanly.
+
+// What are Try-Catch blocks - Try catch blocks are around code operations that are "risky" - meaning they have the potential
+//                             to cause errors such as I/O operations. Additionally, they allow you to handle error appropriate when they
+//                             do occur.
+
+
+// Exception Safety: Exception safety defines what guarantees your code provides if an exception is thrown.
+//  * No-Throw Guarantee
+//      - Function guarantees it will never throw an exception. Often marked noexcept.
+//      - Example - Logging function, destructor, simple math
+//  * Strong guarantee
+//      - Operation either completes successfully or has no effect. If it fails, state is unchanged.
+//      - Example: std::vector::push_back() - is uses a temporary before committing changes.
+//  * Basic Guarantee
+//      - State may change, but object remainders valid and usable (no leaks, corruption)
+//      - Example: Most STL operations guarantee this.
+//  * No Guarantee
+//      - State may become invalid if exception occurs. Avoid this in well-designed code.
+//      - Example: Poorly written custom code (no RAII, manual memory managment)
+
+ Common C++ Exceptions
+
+std::exception	Base class for all standard exceptions. Use it when you just want a general catch-all.	catch (const std::exception& e)
+std::logic_error	Programmer mistake — invalid logic. (Shouldn’t happen in production if code is correct.)	Passing an invalid argument to a function
+std::invalid_argument	Function received an invalid parameter.	sqrt(-1)
+std::domain_error	Input value is outside valid mathematical domain.	log(-1)
+std::length_error	Tried to create or resize a container beyond its capacity.	std::string s; s.resize(-1);
+std::out_of_range	Accessed container element beyond bounds.	v.at(10) when v.size() == 5
+std::runtime_error	Errors that only appear at runtime (I/O, file, network, etc.).	File read fails
+std::overflow_error	Mathematical overflow occurs.	int x = INT_MAX + 1;
+std::underflow_error	Mathematical underflow occurs.	Result too small to represent
+std::bad_alloc	new fails due to memory exhaustion.	int* p = new int[999999999999];
+std::bad_cast	dynamic_cast fails for references.	dynamic_cast<Derived&>(baseRef);
+std::bad_typeid	Using typeid on null pointer.	typeid(*p) when p == nullptr
+std::bad_exception	Unexpected exception type thrown in function with throw() specifier.	Legacy use (rare now)
