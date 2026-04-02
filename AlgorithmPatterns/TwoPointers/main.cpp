@@ -5,31 +5,35 @@
 #include <iterator>
 
 // Example of converging pointers based on context
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 std::vector<int> twoSum_sorted(std::vector<int> nums, const int& target)
 {
-    int i = 0;
-    int j = nums.size() - 1;
+    int i = 0; // first ptr starts in the beggining
+    int j = nums.size() - 1; // second ptr starts at the end
     while(i < j)
     {
-        int two_sum = nums[i] + nums[j];
-        if(two_sum > target) j--;
-        else if(two_sum  < target) i++;
-        else return {i, j};
+        int two_sum = nums[i] + nums[j]; // get opposite ptrs sum
+        if(two_sum > target) j--; // if sum greater decrement second ptr
+        else if(two_sum  < target) i++; // if sum less increment first ptr
+        else return {i, j}; // return both ptrs via list
     }
 }
 
 // Converging pointers example
+// Time Compexity: O(n)
+// Space Complexity: O(1)
 bool isPalindrome(std::string word)
 {
-    int i = 0;
-    int j = word.length() - 1;
-    while(i < j)
+    int i = 0; // first ptr starts in the beggining
+    int j = word.length() - 1; // second ptr starts at the end
+    while(i < j) // move toward each other
     {
-        if(word[i] != word[j]) return false;
+        if(word[i] != word[j]) return false; // if at any point chars are different then not palindrome
         i++;
         j--;
     }
-    return true;
+    return true; // all chars the same return true
 }
 
 // Trigger pointer example

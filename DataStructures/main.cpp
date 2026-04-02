@@ -80,6 +80,11 @@ int main()
   bool yes = s.empty();
   std::cout << "s.empty() 1=true | 0=false: " << yes << "\n";
 
+
+  // Retrieving a char from string and making it lowercase/uppercase
+  std::cout << tolower(s[0]) << "\n";
+  std::cout << toupper(s[0]) << "\n";
+
   // Saving all characters into an array and printing from the array
   char c_array[s.length()];
   for(int i = 0; i < s.length(); i++)
@@ -399,8 +404,44 @@ int main()
   ?  Priority Queue
   ?  Explanation: A priority queue is a queue that has a certain order of retrieval. Usually a priority queue always has the largest value first in the queue, but it can also be reversed to have the smallest always first
   ?               in the queue, and there are also ways to make it custom to have your specific priority need to be first in the queue
+  ?  Note:        A regular priority queue in c++ is always max. Can change to be min
   ?  Implementation: A priority queue is usually implemented using a max or min heap tree.
   */
+
+  //?  Priority Queue (Max Heap)
+  std::cout << "\nPriority Queue\n";
+
+  std::priority_queue<int> max_heap;
+
+  //! Traditional insert function.
+  max_heap.push(1);
+  max_heap.push(2);
+  max_heap.push(3);
+
+  //! Retrieiving.
+  int max = max_heap.top();
+  std::cout << max << "\n";
+
+  //! isEmpty.
+  std::cout << max_heap.empty() << "\n";
+
+
+  //? Priority Queue (Min Heap)
+  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+
+  //! Traditional insert function.
+  min_heap.push(1);
+  min_heap.push(2);
+  min_heap.push(3);
+
+  //! Retrieiving.
+  int min = min_heap.top();
+  std::cout << min << "\n";
+
+  //! isEmpty.
+  std::cout << min_heap.empty() << "\n";
+
+
 
 
   /**

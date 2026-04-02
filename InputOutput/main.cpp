@@ -65,7 +65,7 @@ void file_IO_intermediate(const std::string& file)
         std::ofstream outfile(file);
         if (!outfile) throw std::runtime_error("Error opening outfile");
 
-        // Write each data into file with a , delimiter
+        // Write each data into file with a delimiter
         for (std::pair<std::string, int> item : data)
         {
             outfile << item.first << ", " << item.second << "\n";
@@ -130,6 +130,44 @@ int main()
     file_IO_intermediate("database.txt");
 
     // Hard File I/O (Directory Traversing)
+    try
+    {
+        std::ofstream outfile("text.txt");
+        if (!outfile) throw std::runtime_error("Error opening outfile");
+        outfile << "Bobby ," << 16 << "\n";
+        outfile << "Joe ," << 25 << "\n";
+        outfile.close();
+
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cout << e.what() << "\n";
+    }
+
+    try
+    {
+        std::ifstream infile("text.txt");
+        if (!infile) throw std::runtime_error("Error opening infile");
+        std::string line;
+        while (std::getline(infile, line))
+        {
+            std::stringstream ss(line);
+
+            std::string name;
+            std::string age_token;
+            int age;
+
+            std::getline(ss, name, ',');
+            std::getline(ss, age_token);
+            age = std::stoi(age_token);
+
+            std::cout << "name: " << name << ", " << "age: " << age << "\n";
+        }
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cout << e.what() << "\n";
+    }
 
 
     return 0;
