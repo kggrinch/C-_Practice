@@ -378,6 +378,7 @@ int main()
   ?  Double Ended Queue
   ?  Explanation:
   */
+  std::cout << "\nDouble Ended Queue\n";
 
   std::deque<int> q;
 
@@ -397,8 +398,29 @@ int main()
   ?  Normal Queue
   ?  Explanation:
   */
+  std::cout << "\nNormal Queue\n";
 
+  std::queue<int> normal_queue;
 
+  //! Traditional insert function.
+  normal_queue.push(10);
+  normal_queue.push(6);
+  normal_queue.push(3);
+
+  //! Access front → O(1)
+  int front = normal_queue.front();
+
+  //! Access back → O(1)
+  int back = normal_queue.back();
+
+  //! Pop (dequeue) → O(1)
+  normal_queue.pop();  // removes front element
+
+  //! Check if empty → O(1)
+  q.empty() ? std::cout << "normal queue empty\n" : std::cout << "normal queue not empty\n";
+
+  //! Size → O(1)
+  int sz = q.size();
 
   /*
   ?  Priority Queue
